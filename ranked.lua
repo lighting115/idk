@@ -135,7 +135,6 @@ function AbilitySpam4:Start()
     self.enabled = true
     self.connection = RunService.Heartbeat:Connect(function()
         if not self.enabled then return end
-        for i=1,4 do
         self:UseAbility4(4)
         task.wait()
         pcall(function()
@@ -152,7 +151,6 @@ function AbilitySpam4:Start()
                     ReplicatedStorage.Characters[c].Abilities["3"]
                 )
             end)
-        end
     end)
 end
 
