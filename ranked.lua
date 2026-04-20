@@ -46,7 +46,7 @@ function AbilitySpam4:FindNearestPlayer()
             local th = p.Character:FindFirstChild("Humanoid")
             if tr and th then
                 local hp = th:GetAttribute("Health")
-                if hp and hp > 0 then
+                if hp then
                     local d = (hrp.Position - tr.Position).Magnitude
                     if d < dist then
                         dist = d
@@ -135,6 +135,7 @@ function AbilitySpam4:Start()
     self.enabled = true
     self.connection = RunService.Heartbeat:Connect(function()
         if not self.enabled then return end
+        for i=1,4 do
         self:UseAbility4(4)
         task.wait()
         pcall(function()
@@ -151,6 +152,7 @@ function AbilitySpam4:Start()
                     ReplicatedStorage.Characters[c].Abilities["3"]
                 )
             end)
+        end
     end)
 end
 
@@ -214,4 +216,5 @@ if mob ~= "Mob" then
 end
 
 updateButton()
- pcall(function() AbilitySpam4:Start() end)
+task.wait(0.05)
+pcall(function() AbilitySpam4:Start() end)
