@@ -135,6 +135,31 @@ function AbilitySpam4:Start()
     self.enabled = true
     self.connection = RunService.Heartbeat:Connect(function()
         if not self.enabled then return end
+        for i=1,1 do
+        self:UseAbility4(4)
+        task.wait()
+        pcall(function()
+                local c = self:GetCurrentCharacter()
+                ReplicatedStorage.Remotes.Abilities.AbilityCanceled:FireServer(
+                    ReplicatedStorage.Characters[c].Abilities["4"]
+                )
+            end)
+        self:UseAbility4(3)
+        task.wait()
+        pcall(function()
+                local c = self:GetCurrentCharacter()
+                ReplicatedStorage.Remotes.Abilities.AbilityCanceled:FireServer(
+                    ReplicatedStorage.Characters[c].Abilities["3"]
+                )
+            end)
+        end
+    end)
+end
+function AbilitySpam4:Start2()
+    if self.connection then return end
+    self.enabled = true
+    self.connection = RunService.Heartbeat:Connect(function()
+        if not self.enabled then return end
         for i=1,4 do
         self:UseAbility4(4)
         task.wait()
@@ -217,4 +242,20 @@ end
 
 updateButton()
 task.wait(0.05)
+pcall(function() AbilitySpam4:Start2() end)
+task.wait(0.2)
+pcall(function() AbilitySpam4:Start2() end)
+task.wait(0.2)
+pcall(function() AbilitySpam4:Start2() end)
+task.wait(0.2)
+pcall(function() AbilitySpam4:Start2() end)
+task.wait(0.2)
+pcall(function() AbilitySpam4:Start2() end)
+task.wait(0.2)
+pcall(function() AbilitySpam4:Start2() end)
+task.wait(0.2)
+pcall(function() AbilitySpam4:Start2() end)
+task.wait(9)
+pcall(function() AbilitySpam4:Stop() end)
+task.wait()
 pcall(function() AbilitySpam4:Start() end)
